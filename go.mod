@@ -1,10 +1,11 @@
-module github.com/rawnly/go-wallpaper
+module github.com/sarumaj/go-wallpaper
 
-go 1.16
+go 1.23.4
 
 require (
-	github.com/smartystreets/goconvey v1.6.4 // indirect
-	golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a
-	gopkg.in/ini.v1 v1.62.0
+	golang.org/x/sys v0.28.0
+	gopkg.in/ini.v1 v1.67.0
 	gopkg.in/yaml.v2 v2.4.0
 )
+
+require github.com/stretchr/testify v1.10.0 // indirect

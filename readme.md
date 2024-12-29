@@ -1,11 +1,11 @@
-# wallpaper [![godoc](https://godoc.org/github.com/reujab/wallpaper?status.svg)](https://godoc.org/github.com/reujab/wallpaper)
+# wallpaper [![godoc](https://godoc.org/github.com/sarumaj/wallpaper?status.svg)](https://godoc.org/github.com/sarumaj/wallpaper)
 
 A cross-platform (Linux, Windows, and macOS) Golang library for getting and setting the desktop background.
 
 ## Installation
 
 ```sh
-go get github.com/reujab/wallpaper
+go get github.com/sarumaj/wallpaper
 ```
 
 ## Example
@@ -16,7 +16,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/reujab/wallpaper"
+	"github.com/sarumaj/wallpaper"
 )
 
 func main() {
@@ -38,16 +38,16 @@ func main() {
 
 ## Supported desktops
 
-* Windows
-* macOS
-* GNOME
-* KDE
-* Cinnamon
-* Unity
-* Budgie
-* XFCE
-* LXDE
-* MATE
-* Deepin
-* Most Wayland compositors (set only, requires swaybg)
-* i3 (set only, requires feh)
+- Windows
+- macOS
+- GNOME
+- KDE
+- Cinnamon
+- Unity
+- Budgie
+- XFCE
+- LXDE
+- MATE
+- Deepin
+- Most Wayland compositors (set only, requires swaybg)
+- i3 (set only, requires feh)

@@ -8,30 +8,35 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
-func getGNOME() (string, error) {
+func getGNOMEBackgroundSettingPath(prefix, suffix []string) ([]string, error) {
 	style, err := parseDconf("gsettings", "get", "org.gnome.desktop.interface", "color-scheme")
+	if err != nil {
+		return nil, err
+	}
+
+	if style == "prefer-dark" {
+		return append(prefix, append([]string{"org.gnome.desktop.background", "picture-uri-dark"}, suffix...)...), nil
+	}
+
+	return append(prefix, append([]string{"org.gnome.desktop.background", "picture-uri"}, suffix...)...), nil
+}
+
+func getGNOME() (string, error) {
+	settingsPath, err := getGNOMEBackgroundSettingPath([]string{"get"}, nil)
 	if err != nil {
 		return "", err
 	}
 
-	if style == "prefer-dark" {
-		return parseDconf("gsettings", "get", "org.gnome.desktop.background", "picture-uri-dark")
-	}
-
-	return parseDconf("gsettings", "get", "org.gnome.desktop.background", "picture-uri")
+	return parseDconf("gsettings", settingsPath...)
 }
 
 func setGNOME(path string) error {
-	style, err := parseDconf("gsettings", "get", "org.gnome.desktop.interface", "color-scheme")
+	settingsPath, err := getGNOMEBackgroundSettingPath([]string{"set"}, []string{strconv.Quote("file://" + path)})
 	if err != nil {
 		return err
 	}
 
-	if style == "prefer-dark" {
-		return exec.Command("gsettings", "set", "org.gnome.desktop.background", "picture-uri-dark", strconv.Quote("file://"+path)).Run()
-	}
-
-	return exec.Command("gsettings", "set", "org.gnome.desktop.background", "picture-uri", strconv.Quote("file://"+path)).Run()
+	return exec.Command("gsettings", settingsPath...).Run()
 }
 
 func removeProtocol(input string) string {
